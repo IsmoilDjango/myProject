@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'my_app',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'grappelli',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [

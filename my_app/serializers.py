@@ -25,8 +25,3 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
-    # def create(self, validated_data):
-    #     tags_data = validated_data.pop('tags', [])
-    #     post = Post.objects.create(**validated_data)
-    #     post.tags.set(tags_data)
-    #     return post

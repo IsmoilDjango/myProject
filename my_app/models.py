@@ -22,6 +22,12 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='categories')
     tags = models.ManyToManyField(Tag, blank=True)
 
+    STATUS_CHOICES = (
+        ('draft','Draft'),
+        ('published','Published'),
+        ('archived' ,'Archived'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     def __str__(self):
         return self.title
 
