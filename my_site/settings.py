@@ -41,11 +41,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'grappelli',
+    'rest_framework.authtoken',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.TokenAuthentication',  # Token orqali autentifikatsiya
+    # ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # Tizimga kirgan foydalanuvchilar uchun ruxsat
+    ],
+
 }
 
 MIDDLEWARE = [

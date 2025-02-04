@@ -50,3 +50,4 @@ class CommentAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     model = Rating
     list_display = ['post', 'user', 'value']
+
