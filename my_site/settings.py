@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from my_app.simple_jwt import SIMPLE_JWT
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+SIMPLE_JWT = SIMPLE_JWT
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -42,21 +42,33 @@ INSTALLED_APPS = [
     'django_filters',
     'grappelli',
     'rest_framework.authtoken',
+    'corsheaders',
+    'rest_framework_simplejwt',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.TokenAuthentication',  # Token orqali autentifikatsiya
-    # ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  # Tizimga kirgan foydalanuvchilar uchun ruxsat
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT Authentication
     ],
-
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # Tizimga kirgan foydalanuvchilar uchun ruxsat
+    ],
 }
 
+# fetch('http://127.0.0.1:8000/api/posts/', {
+#   method: 'GET',
+#   headers: {
+#     'Authorization': 'Bearer 8d946cbf9f7d86ee7ebc38033c2b4fb0a0b0e6c6'
+#   }
+# })
+# .then(response => response.json())
+# .then(data => console.log(data))
+# .catch(error => console.error('Error:', error))
+# 8d946cbf9f7d86ee7ebc38033c2b4fb0a0b0e6c6
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,8 +76,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
+]
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'my_site.urls'
 
 TEMPLATES = [
