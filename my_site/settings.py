@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import dj_database_url
+import os
 from pathlib import Path
 from my_app.simple_jwt import SIMPLE_JWT
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# datalog api key = 2468ismoil
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,16 +58,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# fetch('http://127.0.0.1:8000/api/posts/', {
-#   method: 'GET',
-#   headers: {
-#     'Authorization': 'Bearer 8d946cbf9f7d86ee7ebc38033c2b4fb0a0b0e6c6'
-#   }
-# })
-# .then(response => response.json())
-# .then(data => console.log(data))
-# .catch(error => console.error('Error:', error))
-# 8d946cbf9f7d86ee7ebc38033c2b4fb0a0b0e6c6
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -76,9 +68,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'PATCH',
+]
+
 ROOT_URLCONF = 'my_site.urls'
 
 TEMPLATES = [
@@ -99,20 +101,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
 
-
+DATABASE_URL = os.getenv('DATABASE_URL')
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+DATABASE_CHOICE = os.getenv('DJANGO_DB', 'default')  # Agar bu mavjud bo'lsa, uni ishlatadi
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': dj_database_url.config(default=DATABASE_URL) if DATABASE_URL else {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'postgres',
+        'PASSWORD': 'YangiParol123',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+    'local': {  # Mahalliy PostgreSQL
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'postgres',
+        'PASSWORD': 'YangiParol123',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
+# ALTER USER local_user WITH PASSWORD '_ismoil_11'
+# ALTER USER ismoildjango WITH PASSWORD '_ismoil_11';
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -145,8 +157,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
