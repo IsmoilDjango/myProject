@@ -122,9 +122,10 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+
+
 DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
-# ALTER USER local_user WITH PASSWORD '_ismoil_11'
-# ALTER USER ismoildjango WITH PASSWORD '_ismoil_11';
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
