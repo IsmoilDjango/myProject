@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 import dj_database_url
 import os
 from pathlib import Path
@@ -27,9 +28,6 @@ SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-# datalog api key = 2468ismoil
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,31 +100,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_site.wsgi.application'
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-# Database
-DATABASE_CHOICE = os.getenv('DJANGO_DB', 'default')  # Agar bu mavjud bo'lsa, uni ishlatadi
+
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL) if DATABASE_URL else {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'postgres',
-        'PASSWORD': 'YangiParol123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'mydatabase_oyx9',
+        'USER': 'ismoil',
+        'PASSWORD': '3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK',  # Render.com'dan olingan parolni yozing
+        'HOST': 'dpg-cuuu77fnoe9s73ao01cg-a',  # Render.com URLni ishlatish kerak
+        'PORT': '5432',  # Render uchun odatiy port
     },
-    'local': {  # Mahalliy PostgreSQL
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'postgres',
-        'PASSWORD': 'YangiParol123',
-        'HOST': 'localhost',
-        'PORT': '5433',
-    }
 }
+
 # git remote add origin https://git.render.com/Ismoil/myProject.git
-
+#
 # postgres://testadmin:YangiParol123@localhost:5432/mydatabase
-DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
-
+# DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
+# postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a/mydatabase_oyx9
 
 AUTH_PASSWORD_VALIDATORS = [
     {
