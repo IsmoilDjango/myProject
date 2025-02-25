@@ -122,8 +122,9 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+# git remote add origin https://git.render.com/Ismoil/myProject.git
 
-
+# postgres://testadmin:YangiParol123@localhost:5432/mydatabase
 DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
 
 
