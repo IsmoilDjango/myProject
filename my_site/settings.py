@@ -26,10 +26,10 @@ SIMPLE_JWT = SIMPLE_JWT
 SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['myproject-5wxp.onrender.com', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = ['*']
+# user = User.objects.get(username='IsmoilDjangoAdmin2000')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
