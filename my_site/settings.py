@@ -16,7 +16,8 @@ from pathlib import Path
 from my_app.simple_jwt import SIMPLE_JWT
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+user = User.objects.create_superuser('ismoilDjangoAdmin0011', 'maxammatovislom222@gmail.com', 'parol123!')
+print("Superuser successfully created!")
 SIMPLE_JWT = SIMPLE_JWT
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
