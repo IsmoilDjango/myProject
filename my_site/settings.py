@@ -112,11 +112,6 @@ DATABASES = {
     },
 }
 
-# git remote add origin https://git.render.com/Ismoil/myProject.git
-#
-# postgres://testadmin:YangiParol123@localhost:5432/mydatabase
-# DATABASES['default'] = DATABASES.get(DATABASE_CHOICE, DATABASES['default'])
-# postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a/mydatabase_oyx9
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,11 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -150,10 +140,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
