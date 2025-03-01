@@ -14,6 +14,7 @@ import dj_database_url
 import os
 from pathlib import Path
 from my_app.simple_jwt import SIMPLE_JWT
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # user = User.objects.create_superuser('ismoilDjangoAdmin0011', 'maxammatovislom222@gmail.com', 'parol123!')
@@ -27,7 +28,9 @@ SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-if os.environ.get('DJANGO_DEVELOPMENT') == 'True':
+env = environ.Env()
+environ.Env.read_env()
+if env('DJANGO_DEVELOPMENT', default=False):
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'myproject-5wxp.onrender.com']
