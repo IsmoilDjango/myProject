@@ -148,13 +148,16 @@ USE_TZ = True
 
 # settings.py
 
-STATIC_URL = '/static/'
+
 # Statik fayllar Render serveriga ko'chiriladigan joy
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # Agar qo'shimcha static papkalar mavjud bo'lsa, ularni ham ko'rsating
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # static/ katalogi mavjud bo‘lishi shart
+    BASE_DIR / "my_site" / "static",
 ]
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

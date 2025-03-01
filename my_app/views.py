@@ -1,3 +1,5 @@
+import asyncio
+
 from django.shortcuts import render
 # Create your views here.
 from rest_framework.views import APIView
@@ -11,7 +13,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import PermissionDenied
 from .filters import PostFilter
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
+from django.views import View
+from django.http import HttpResponse
+class home(View):
+    async def get(self, request, *args, **kwargs):
+        await asyncio.sleep(1)
+        return HttpResponse("Hello man!")
 
 class PostListCreateAPIView(ListCreateAPIView):
     queryset = Post.objects.all()
