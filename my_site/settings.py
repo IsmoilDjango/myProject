@@ -118,6 +118,16 @@ DATABASES = {
         'PORT': '5432',  # Render uchun odatiy port
     },
 }
+# DATABASES = {
+#     'default': {  # Django asosiy (default) ma’lumotlar bazasini belgilaydi
+#         'ENGINE': 'django.db.backends.postgresql',  # PostgreSQL backend
+#         'NAME': os.getenv('mydatabase_oyx9', 'mydatabase'),  # Ma’lumotlar bazasi nomi
+#         'USER': os.getenv('ismoil', 'testadmin'),  # PostgreSQL foydalanuvchi nomi
+#         'PASSWORD': os.getenv('3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK', ''),  # PostgreSQL paroli
+#         'HOST': os.getenv('dpg-cuuu77fnoe9s73ao01cg-a', 'localhost'),  # PostgreSQL serveri joylashgan manzil
+#         'PORT': os.getenv('DB_PORT', '5432'),  # PostgreSQL porti (standart: 5432)
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -155,7 +165,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Agar qo'shimcha static papkalar mavjud bo'lsa, ularni ham ko'rsating
 STATICFILES_DIRS = [
-    BASE_DIR / "my_site" / "static",
+    BASE_DIR / "static",
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
