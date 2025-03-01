@@ -15,6 +15,9 @@ import os
 from pathlib import Path
 from my_app.simple_jwt import SIMPLE_JWT
 import environ
+from dotenv import load_dotenv
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # user = User.objects.create_superuser('ismoilDjangoAdmin0011', 'maxammatovislom222@gmail.com', 'parol123!')
@@ -113,23 +116,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mydatabase_oyx9',
         'USER': 'ismoil',
-        'PASSWORD': '3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK',  # Render.com'dan olingan parolni yozing
-        'HOST': 'dpg-cuuu77fnoe9s73ao01cg-a',  # Render.com URLni ishlatish kerak
+        'PASSWORD': '3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK',
+        'HOST': 'dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com',  # Render.com external URL
         'PORT': '5432',  # Render uchun odatiy port
     },
+
 }
-# DATABASES = {
-#     'default': {  # Django asosiy (default) ma’lumotlar bazasini belgilaydi
-#         'ENGINE': 'django.db.backends.postgresql',  # PostgreSQL backend
-#         'NAME': os.getenv('mydatabase_oyx9', 'mydatabase'),  # Ma’lumotlar bazasi nomi
-#         'USER': os.getenv('ismoil', 'testadmin'),  # PostgreSQL foydalanuvchi nomi
-#         'PASSWORD': os.getenv('3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK', ''),  # PostgreSQL paroli
-#         'HOST': os.getenv('dpg-cuuu77fnoe9s73ao01cg-a', 'localhost'),  # PostgreSQL serveri joylashgan manzil
-#         'PORT': os.getenv('DB_PORT', '5432'),  # PostgreSQL porti (standart: 5432)
-#     }
-# }
 
+# $env: DATABASE_URL="postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com:5432/mydatabase_oyx9"
 
+# DATABASE_URL='postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a/mydatabase_oyx9' python manage.py createsuperuser
+# PGPASSWORD=3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK psql -h dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com -U ismoil mydatabase_oyx9
+# postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com/mydatabase_oyx9
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
