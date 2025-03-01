@@ -26,9 +26,11 @@ SIMPLE_JWT = SIMPLE_JWT
 SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['myproject-5wxp.onrender.com']
+DEBUG = True
+if os.environ.get('DJANGO_DEVELOPMENT') == 'True':
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'myproject-5wxp.onrender.com']
 
 # user = User.objects.get(username='IsmoilDjangoAdmin2000')
 INSTALLED_APPS = [
@@ -61,7 +63,6 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,7 +73,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware'
-
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = [
@@ -147,11 +147,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # Statik fayllar Render serveriga ko'chiriladigan joy
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Agar qo'shimcha static papkalar mavjud bo'lsa, ularni ham ko'rsating
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "static",  # static/ katalogi mavjud bo‘lishi shart
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
