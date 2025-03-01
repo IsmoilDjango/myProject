@@ -150,7 +150,7 @@ USE_TZ = True
 
 
 # Statik fayllar Render serveriga ko'chiriladigan joy
-STATIC_URL = '/static/'
+STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Agar qo'shimcha static papkalar mavjud bo'lsa, ularni ham ko'rsating
