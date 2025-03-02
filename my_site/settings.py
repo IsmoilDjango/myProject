@@ -17,6 +17,8 @@ from my_app.simple_jwt import SIMPLE_JWT
 import environ
 from dotenv import load_dotenv
 
+API_TOKEN = os.getenv('API_TOKEN')
+
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +32,7 @@ SIMPLE_JWT = SIMPLE_JWT
 SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 env = environ.Env()
 environ.Env.read_env()
 if env('DJANGO_DEVELOPMENT', default=False):
