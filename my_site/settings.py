@@ -35,11 +35,12 @@ SECRET_KEY = 'django-insecure-_!*688f*8^v+!w@hq%6(2y#i=8ln$g!wnofgfd+mj-9&*j^p4q
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 env = environ.Env()
 environ.Env.read_env()
-if env('DJANGO_DEVELOPMENT', default=False):
+DJANGO_DEVELOPMENT = env('DJANGO_DEVELOPMENT', default=False)
+
+if DJANGO_DEVELOPMENT:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'myproject-5wxp.onrender.com']
-
 # user = User.objects.get(username='IsmoilDjangoAdmin2000')
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -125,11 +126,6 @@ DATABASES = {
 
 }
 
-# $env: DATABASE_URL="postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com:5432/mydatabase_oyx9"
-
-# DATABASE_URL='postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a/mydatabase_oyx9' python manage.py createsuperuser
-# PGPASSWORD=3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK psql -h dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com -U ismoil mydatabase_oyx9
-# postgresql://ismoil:3PtTxPoQP7j7prqlTOrfHhoYRgzXLAuK@dpg-cuuu77fnoe9s73ao01cg-a.oregon-postgres.render.com/mydatabase_oyx9
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
