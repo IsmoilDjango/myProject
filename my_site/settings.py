@@ -63,12 +63,13 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT Authentication
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # Tizimga kirgan foydalanuvchilar uchun ruxsat
+    'DEFAULT_PERMISSION_CLASSES': [  # Buni qo‘shing
+        'rest_framework.permissions.AllowAny',
     ],
 }
+
 
 
 MIDDLEWARE = [
