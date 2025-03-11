@@ -20,7 +20,7 @@ class PostListCreateAPIView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filterset_class = PostFilter
     def perform_create(self, serializer):
@@ -42,7 +42,7 @@ class PostListCreateAPIView(ListCreateAPIView):
 class PostDetailApiView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_update(self, serializer):
         if self.request.user != serializer.instance.author:
@@ -56,7 +56,7 @@ class PostDetailApiView(RetrieveUpdateDestroyAPIView):
 class CommentCreateApiView(ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
