@@ -20,29 +20,24 @@ class PostListCreateAPIView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filterset_class = PostFilter
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response({
-            "message":"Post muvaffaqqiyatli yaratildi!",
-            "data":serializer.data,
-            "clear_form":True
-        },
-        status=status.HTTP_201_CREATED,
-            headers = headers
-        )
+        response = super().create(request, *args, **kwargs)
+        response.data["message"] = "Post muvaffaqqiyatli yaratildi!"
+        response.data["clear_form"] = True
+        return response
+
 
 class PostDetailApiView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_update(self, serializer):
         if self.request.user != serializer.instance.author:
@@ -54,10 +49,16 @@ class PostDetailApiView(RetrieveUpdateDestroyAPIView):
         instance.delete()
 
 class CommentCreateApiView(ListCreateAPIView):
-    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['post']  # Faqat tegishli postga oid kommentlarni olish
+
+    def get_queryset(self):
+        return Comment.objects.filter(post_id=self.kwargs['post_id'])
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        post = Post.objects.get(id=self.kwargs['post_id'])
+        serializer.save(author=self.request.user, post=post)
 
